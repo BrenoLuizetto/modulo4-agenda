@@ -9,6 +9,19 @@
 import UIKit
 
 class Repositorio: NSObject {
+    
+    func recuperaAlunos(completion: @escaping(_ listaDeAlunos: Array<Aluno>) -> Void){
+        var alunos = AlunoDAO().recuperaAlunos()
+        if alunos.count == 0 {
+            AlunoAPI().recuperaAlunos {
+                alunos = AlunoDAO().recuperaAlunos()
+            }
+        }
+        
+        else{
+            
+        }
+    }
 
     func salvaAluno(aluno: Dictionary <String, String>){
         AlunoAPI().salvaDadosNoServidor(parametros: [aluno])
