@@ -14,7 +14,7 @@ class AlunoAPI: NSObject {
     //MARK: - GET
     
     func recuperaAlunos(completion: @escaping() -> Void){
-        Alamofire.request("https://localhost:8080/api/aluno/lista", method: .get).responseJSON{(response) in
+        Alamofire.request("https://localhost:8080/api/aluno", method: .get).responseJSON{(response) in
             switch response.result{
             case .success:
                 
@@ -49,5 +49,20 @@ class AlunoAPI: NSObject {
         requisicao.addValue("application/json", forHTTPHeaderField: "Content-Type")
         Alamofire.request(requisicao)
         
+    }
+    
+    //MARK: - DELETE
+    
+    func deletaAluno(id: String){
+        Alamofire.request("http://localhost:8080/api/aluni/\(id)", method: .delete).responseJSON { (resposta) in
+            switch resposta.result{
+            case .failure:
+                print(resposta.result.error!)
+                break
+                
+            default:
+                break
+            }
+        }
     }
 }
